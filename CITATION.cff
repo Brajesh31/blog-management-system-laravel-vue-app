@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the repository."
+title: "Blog Management System"
+type: software
+authors:
+  - family-names: Kumar
+    given-names: Brajesh
+    website: "https://github.com/brajesh31"
+repository-code: "https://github.com/Brajesh31/blog-management-system-laravel-vue-app"
+license: MIT
+keywords:
+  - Laravel
+  - Vue.js
+  - Inertia.js
+  - blog
+abstract: >-
+  A Laravel and Inertia.js application with a Vue 3 and TypeScript interface
+  for blog publishing and account management. The repository is an in-progress
+  project; see its README for current implementation status.
