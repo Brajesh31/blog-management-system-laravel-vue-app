@@ -1,11 +1,16 @@
+# Normalize text files in the repository and generated source archives.
 * text=auto eol=lf
 
+# Improve diffs for common source and documentation files.
+*.php diff=php
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
-*.php diff=php
 
-/.github export-ignore
-CHANGELOG.md export-ignore
-.styleci.yml export-ignore
+# Keep image assets binary.
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.png binary
