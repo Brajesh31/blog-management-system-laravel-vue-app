@@ -101,7 +101,7 @@ Build the frontend with:
 npm run build
 ```
 
-The build script runs `vue-tsc` before Vite. Test configuration is in `phpunit.xml`; feature tests use the configured in-memory SQLite database.
+The build script runs `vue-tsc` before Vite. `phpunit.xml` configures the testing environment, but its SQLite database overrides are commented out. Configure a separate disposable test database (or deliberately enable a separate SQLite test connection) before running feature tests, which refresh database state. See [Installation](docs/installation.md#testing-database-configuration).
 
 ## Documentation
 
