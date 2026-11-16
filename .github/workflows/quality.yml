@@ -18,7 +18,7 @@ jobs:
     name: Vue and TypeScript build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -35,7 +35,7 @@ jobs:
       DB_CONNECTION: sqlite
       DB_DATABASE: ":memory:"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
@@ -55,7 +55,7 @@ jobs:
     name: Markdown, local links and diagram inventory
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Validate Markdown formatting
         run: npx --yes markdownlint-cli2@0.18.1 "**/*.md"
       - name: Validate local Markdown links and Mermaid source inventory
