@@ -1,0 +1,13 @@
+flowchart TD
+ Source[Source and lockfiles] --> Composer[composer install --no-dev]
+ Source --> Npm[npm ci]
+ Npm --> Build[npm run build]
+ Composer --> Artifact[Release artifact]
+ Build --> Artifact
+ Artifact --> Env[Protected production environment]
+ Env --> Backup[Backup database and required media]
+ Backup --> Deploy[Deploy with web root = public/]
+ Deploy --> Migrate[php artisan migrate --force]
+ Migrate --> Restart[Restart PHP and supervised workers]
+ Restart --> Verify[Health, auth, mail, DB and enabled workflows]
+ Verify --> Live[Release accepted]
