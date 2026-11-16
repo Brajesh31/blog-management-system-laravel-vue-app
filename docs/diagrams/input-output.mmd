@@ -1,0 +1,30 @@
+flowchart LR
+  subgraph Inputs
+    Account[Registration and login fields]
+    Profile[Profile fields]
+    Post[Post title and TipTap HTML]
+    Image[Optional image file]
+    Query[Search query]
+  end
+  subgraph Laravel
+    Validate[Middleware and server validation]
+    Logic[Controllers and Eloquent]
+  end
+  subgraph Outputs
+    Page[Inertia page props]
+    Redirect[Redirect and flash status]
+    Errors[Validation errors]
+    Rows[(Database records)]
+    Media[(Stored image path)]
+  end
+  Account --> Validate
+  Profile --> Validate
+  Post --> Validate
+  Image --> Validate
+  Query --> Validate
+  Validate --> Logic
+  Logic --> Page
+  Logic --> Redirect
+  Validate --> Errors
+  Logic --> Rows
+  Logic --> Media
