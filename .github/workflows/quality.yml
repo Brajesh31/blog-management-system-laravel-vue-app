@@ -1,0 +1,72 @@
+name: Laravel and Vue Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Vue and TypeScript build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  backend:
+    name: PHP syntax and formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - name: PHP syntax check
+        run: |
+          find app bootstrap config database routes tests -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - run: vendor/bin/pint --test
+
+  documentation:
+    name: Documentation links and diagram inventory
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate local Markdown links and Mermaid source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, sys
+          files = [Path('README.md'), *Path('docs').rglob('*.md')]
+          errors = []
+          for file in files:
+              content = file.read_text(encoding='utf-8')
+              for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', content):
+                  if target.startswith(('http://', 'https://', 'mailto:', '#')):
+                      continue
+                  path = target.split('#', 1)[0]
+                  if path and not (file.parent / path).resolve().exists():
+                      errors.append(f'{file}: missing {target}')
+          diagrams = list(Path('docs/diagrams').glob('*.mmd'))
+          if len(diagrams) < 8:
+              errors.append(f'Expected at least 8 Mermaid files, found {len(diagrams)}')
+          if errors:
+              print('\n'.join(errors))
+              sys.exit(1)
+          print(f'Checked {len(files)} Markdown files and {len(diagrams)} Mermaid sources.')
+          PY
