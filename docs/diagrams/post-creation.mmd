@@ -1,0 +1,17 @@
+flowchart TD
+ Start[📝 Open /posts/create] --> Form[Enter title and TipTap content]
+ Form --> Image{Optional image?}
+ Image -->|Yes| Client[Client type/size checks and preview]
+ Image -->|No| Submit[Choose Save Draft or Publish]
+ Client --> Submit
+ Submit --> Server[StorePostRequest validation]
+ Server --> Valid{Valid request?}
+ Valid -->|No| Errors[Return field errors]
+ Valid -->|Yes| Publish{Publishing?}
+ Publish -->|Yes| Content{Content non-empty?}
+ Content -->|No| Errors
+ Content -->|Yes| Save[Store image and create post]
+ Publish -->|No, draft| Save
+ Save --> Redirect[Redirect to dashboard]
+ Redirect --> End[Show success state]
+ Save -.-> Warning[⚠️ HTML sanitization still required]
