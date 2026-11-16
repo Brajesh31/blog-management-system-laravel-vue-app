@@ -27,27 +27,38 @@ jobs:
       - run: npm run build
 
   backend:
-    name: PHP syntax and formatting
+    name: PHP syntax, tests and formatting
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:VGVzdEtleUZvckdpdEh1YlRlc3RzMDEyMzQ1Njc4OTA=
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ":memory:"
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           tools: composer:v2
+          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, xml
           coverage: none
       - run: composer install --no-interaction --prefer-dist
       - name: PHP syntax check
         run: |
           find app bootstrap config database routes tests -type f -name '*.php' -print0 | xargs -0 -n1 php -l
-      - run: vendor/bin/pint --test
+      - name: Pint formatting check
+        run: vendor/bin/pint --test
+      - name: Pest and PHPUnit tests
+        run: php artisan test
 
   documentation:
-    name: Documentation links and diagram inventory
+    name: Markdown, local links and diagram inventory
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate local Markdown links and Mermaid source
+      - name: Validate Markdown formatting
+        run: npx --yes markdownlint-cli2@0.18.1 "**/*.md"
+      - name: Validate local Markdown links and Mermaid source inventory
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -62,9 +73,9 @@ jobs:
                   path = target.split('#', 1)[0]
                   if path and not (file.parent / path).resolve().exists():
                       errors.append(f'{file}: missing {target}')
-          diagrams = list(Path('docs/diagrams').glob('*.mmd'))
-          if len(diagrams) < 8:
-              errors.append(f'Expected at least 8 Mermaid files, found {len(diagrams)}')
+          diagrams = list(Path('docs/diagrams').rglob('*.mmd'))
+          if len(diagrams) < 20:
+              errors.append(f'Expected at least 20 Mermaid files, found {len(diagrams)}')
           if errors:
               print('\n'.join(errors))
               sys.exit(1)
