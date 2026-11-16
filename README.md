@@ -4,7 +4,7 @@
 
 # 📝 Blog Management System
 
-### A Laravel + Inertia + Vue publishing application foundation, in active development.
+**A Laravel + Inertia + Vue publishing application foundation, in active development.**
 
 <p>
   <img alt="Laravel" src="https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white"/>
@@ -39,7 +39,7 @@
 - [🎯 Problem and solution](#-problem-and-solution)
 - [✨ Features and implementation status](#-features-and-implementation-status)
 - [🧰 Technology stack](#-technology-stack)
-- [🖼️ Screenshots and demo](#-screenshots-and-demo)
+- [🖼️ Screenshots and demo](assets/screenshots/README.md)
 - [⚙️ Requirements](#️-requirements)
 - [🚀 Installation](#-installation)
 - [▶️ Run locally](#️-run-locally)
@@ -541,4 +541,4 @@ This repository is distributed under the **MIT License**. See [LICENSE](LICENSE)
 
 </div>
 
-Last updated: 2026-11-16 19:40 UTC
+Last updated: 2026-11-17
