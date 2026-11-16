@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Blog Management System mark</title>
+  <desc id="desc">A stylized article page with three text lines, framed by a rounded gradient square.</desc>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6cff"/><stop offset="1" stop-color="#2bd6c2"/></linearGradient></defs>
+  <rect x="4" y="4" width="152" height="152" rx="38" fill="#142343"/>
+  <rect x="29" y="25" width="102" height="110" rx="16" fill="url(#g)"/>
+  <path d="M53 53 H107 M53 76 H107 M53 99 H91" fill="none" stroke="#102344" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="111" cy="112" r="13" fill="#f8fbff"/>
+</svg>
