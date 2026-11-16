@@ -1,17 +1,23 @@
 # Changelog
 
-This file records notable project changes. Historical changes before this changelog was added are not reconstructed, and the repository does not currently define a tagged release history.
+This file records notable repository changes. Earlier history is not reconstructed; no tagged release history is implied.
 
 ## [Unreleased]
 
 ### Added
-
-- Project overview, implementation status, and local setup instructions.
-- Architecture, installation, development, deployment, HTTP route, database, troubleshooting, and FAQ documentation.
-- Contribution guidance, code of conduct, security reporting policy, support guidance, and project roadmap.
-- MIT license attribution, citation metadata, and repository housekeeping configuration.
+- Detailed documentation hub and project structure guide.
+- Security threat model and observed risk register.
+- Accessibility, privacy, testing, configuration and operations guides.
+- Editable Mermaid diagrams for architecture, request lifecycle, authentication, post creation, post visibility, data relationships, deployment, content security and incident response.
+- ADR index and decision template.
+- Structured bug, feature request and documentation issue forms.
+- Laravel/Vue quality workflow and dependency/secret hygiene workflow.
+- Expanded pull request checklist for testing, authorization, privacy, security and accessibility.
 
 ### Changed
+- README now links the full documentation suite and includes an architecture diagram.
+- Clarified incomplete post lifecycle and social interaction workflows.
+- Expanded roadmap with security and production-readiness priorities.
 
-- Clarified which post and social features have data structures but do not yet have complete application workflows.
-- Expanded the sample environment and repository guidance to distinguish local development from production configuration.
+### Notes
+- Documentation additions do not fix application code. The missing feed page, unfinished post lifecycle actions, authorization and rich-content sanitization remain implementation work.
