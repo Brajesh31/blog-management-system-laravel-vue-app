@@ -1,0 +1,37 @@
+name: "♿ Accessibility issue"
+description: Report a barrier in keyboard, screen-reader, contrast or responsive use.
+title: "[Accessibility]: "
+labels: ["accessibility", "needs-triage"]
+body:
+  - type: textarea
+    id: barrier
+    attributes:
+      label: Describe the barrier
+      description: What task cannot be completed, or what content/control is difficult to use?
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page or component
+      description: Route, page or component name.
+    validations:
+      required: true
+  - type: textarea
+    id: assistive
+    attributes:
+      label: Environment and assistive technology
+      description: Browser, OS, keyboard-only or screen-reader details, when relevant.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected accessible behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have not included personal or sensitive data.
+          required: true
