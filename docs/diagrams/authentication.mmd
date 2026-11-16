@@ -1,0 +1,14 @@
+flowchart TD
+ Guest[👤 Guest] --> Login[GET /login]
+ Login --> Submit[POST /login]
+ Submit --> Valid{Credentials valid?}
+ Valid -->|No| Error[Return validation error]
+ Valid -->|Yes| Session[Authenticated session]
+ Session --> Verified{Email verified?}
+ Verified -->|No| Prompt[Verification prompt]
+ Verified -->|Yes| Allowed[Dashboard and verified routes]
+ Prompt --> Mail[Resend verification email]
+ Mail --> Verify[Signed verification URL]
+ Verify --> Allowed
+ Allowed --> Logout[POST /logout]
+ Logout --> Guest
