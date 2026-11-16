@@ -54,7 +54,6 @@ These are target tests, not claims that the scenarios currently pass.
 
 Never make CI green by skipping a failing check that reveals a genuine defect.
 
-
 ## Observed CI baseline (2026-11-16)
 
 The repository's current quality workflow was executed against the documentation-enhancement branch. The PHP syntax check and changed-file Pint check passed, but the full test suite did not.
