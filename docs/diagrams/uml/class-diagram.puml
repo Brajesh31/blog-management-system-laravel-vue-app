@@ -1,0 +1,73 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class User {
+  +name: string
+  +username: string
+  +email: string
+  +password: string
+  +posts()
+  +comments()
+  +likes()
+  +bookmarks()
+  +notifications()
+}
+
+class Post {
+  +user_id: integer
+  +title: string
+  +content: text
+  +slug: string
+  +image: string
+  +visibility: enum
+  +user()
+  +tags()
+  +comments()
+  +likes()
+  +bookmarks()
+}
+
+class Comment {
+  +user_id: integer
+  +post_id: integer
+  +parent_id: integer?
+  +content: text
+  +parent()
+  +replies()
+}
+
+class Like {
+  +user_id: integer
+  +post_id: integer
+}
+
+class Bookmark {
+  +user_id: integer
+  +post_id: integer
+}
+
+class Tag {
+  +name: string
+  +slug: string
+}
+
+class Notification {
+  +user_id: integer
+  +sender_id: integer?
+  +type: enum
+  +message: string
+  +read_at: datetime?
+}
+
+User "1" -- "0..*" Post : authors
+User "1" -- "0..*" Comment : writes
+Post "1" -- "0..*" Comment : contains
+Comment "0..1" -- "0..*" Comment : parent/replies
+User "1" -- "0..*" Like
+Post "1" -- "0..*" Like
+User "1" -- "0..*" Bookmark
+Post "1" -- "0..*" Bookmark
+Post "0..*" -- "0..*" Tag
+User "1" -- "0..*" Notification : receives
+User "0..1" -- "0..*" Notification : sender
+@enduml
