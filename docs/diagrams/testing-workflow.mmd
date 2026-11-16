@@ -1,0 +1,13 @@
+flowchart TD
+ Change[Code change] --> PHP[PHP syntax and Pint]
+ Change --> Tests[Pest feature/unit tests]
+ Change --> Frontend[Vue type-check and Vite build]
+ Change --> Docs[Markdown link and diagram inventory]
+ PHP --> Review[Review results]
+ Tests --> Review
+ Frontend --> Review
+ Docs --> Review
+ Review --> Merge{All required checks pass?}
+ Merge -->|Yes| MergeOK[Eligible for maintainer review/merge]
+ Merge -->|No| Fix[Correct failure and rerun]
+ Fix --> Change
