@@ -1,0 +1,10 @@
+flowchart TD
+ Route[Route definition] --> Guard[Web/session middleware]
+ Guard --> Request[Form Request validation]
+ Request --> Controller[Controller action]
+ Controller --> Model[Eloquent model]
+ Model --> Query[Database query]
+ Controller --> Storage[Optional filesystem operation]
+ Controller --> Response[Redirect or Inertia response]
+ Response --> Page[Vue page]
+ Page --> Browser[Browser rendering]
