@@ -1,0 +1,11 @@
+flowchart TD
+ Input[Untrusted user content] --> Auth[Authenticate and authorize]
+ Auth --> Validate[Validate fields, size and format]
+ Validate --> Upload{Has image?}
+ Upload -->|Yes| Inspect[Inspect actual file content]
+ Upload -->|No| Sanitize[Sanitize rich HTML]
+ Inspect --> Store[Store with generated name and access policy]
+ Store --> Sanitize
+ Sanitize --> Persist[Persist approved data]
+ Persist --> Render[Render escaped text or sanitized HTML]
+ Render -.-> Note[Proposed secure control flow, not a claim that every step exists today]
