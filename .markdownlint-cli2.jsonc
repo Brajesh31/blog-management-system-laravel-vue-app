@@ -1,0 +1,23 @@
+{
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD031": false,
+    "MD032": false,
+    "MD033": { "allowed_elements": ["a", "div", "img", "p"] },
+    "MD041": false,
+    "MD060": false
+  },
+  "globs": [
+    "README.md",
+    "*.md",
+    "docs/**/*.md",
+    ".github/**/*.md",
+    "assets/**/*.md"
+  ],
+  "ignores": [
+    "vendor/**",
+    "node_modules/**"
+  ]
+}
