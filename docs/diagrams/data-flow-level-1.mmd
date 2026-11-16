@@ -1,0 +1,11 @@
+flowchart TD
+ User[Browser] --> P1[Authenticate and route]
+ P1 --> P2[Validate request]
+ P2 --> P3[Execute application logic]
+ P3 <--> D1[(User and content tables)]
+ P3 --> P4[Store optional image]
+ P4 <--> D2[(Public filesystem)]
+ P3 --> P5[Create Inertia response]
+ P5 --> User
+ P3 --> P6[Send notification email when configured]
+ P6 --> Mail[Mail transport]
