@@ -1,0 +1,10 @@
+flowchart TD
+ Event[Push, pull request or manual run] --> Quality[Laravel and Vue Quality workflow]
+ Quality --> Frontend[npm ci and npm run build]
+ Quality --> Backend[Composer install, PHP lint and Pint]
+ Quality --> Docs[Markdown links and Mermaid inventory]
+ Event --> Security[Dependency and secret hygiene workflow]
+ Security --> Composer[Composer audit]
+ Security --> Npm[npm audit]
+ Security --> Secrets[Gitleaks]
+ Event --> Timestamp[README timestamp automation]
