@@ -1,0 +1,31 @@
+flowchart LR
+ subgraph Laravel
+   Web[Routes]
+   Auth[Auth controllers]
+   Profile[Profile controllers]
+   Post[Post controller]
+   Requests[Form Requests]
+   Models[Eloquent models]
+ end
+ subgraph Vue_Inertia
+   Layout[MainLayout]
+   Pages[Inertia Pages]
+   Nav[Navigation components]
+   Editor[TipTap editor]
+   UI[Shared UI primitives]
+   State[Pinia and composables]
+ end
+ Web --> Auth
+ Web --> Profile
+ Web --> Post
+ Auth --> Requests
+ Profile --> Requests
+ Post --> Requests
+ Auth --> Models
+ Profile --> Models
+ Post --> Models
+ Pages --> Layout
+ Layout --> Nav
+ Pages --> Editor
+ Pages --> UI
+ Layout --> State
