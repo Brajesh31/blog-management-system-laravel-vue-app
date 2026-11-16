@@ -20,5 +20,8 @@ This list records current engineering debt observed during repository review. It
 | TD-14 | Frontend imports | Case-mismatched `@/components/ui/label` paths on Linux | CI type-check cannot resolve label components | Align import path casing with actual `Components/ui/label` directory |
 | TD-15 | Frontend build | `resources/js/app.ts` imports Ziggy from Composer vendor path | Build requires Composer vendor files before Vite type-check | Ensure CI installs Composer dependencies before `npm run build` |
 | TD-16 | PHP style | Pint reported 19 formatting issues across 68 existing PHP files | Full-repository style check fails even when no PHP code changes | Apply Pint in a separately reviewed code-formatting change; CI checks changed PHP files |
+| TD-17 | Test environment | Feature tests render Blade/Inertia pages without a generated Vite manifest | Page tests fail with ViteManifestNotFoundException | Produce a valid frontend manifest or use Laravel's documented no-Vite testing setup after build strategy is fixed |
+| TD-18 | Test fixtures | Profile/password tests submit a password that does not match the current factory's development password | Authentication and account-management tests fail despite successful DB setup | Align tests/factories and use explicit, test-only credentials |
+| TD-19 | Authentication route tests | Existing test expectations for login, verification and password confirmation screens do not consistently match route responses | 302/404 responses fail tests expecting 200 | Review route middleware/page availability and update tests only to intended product behavior |
 
 Do not mark debt resolved after documentation-only work. Close an item only when implementation, tests and operational evidence demonstrate resolution.
