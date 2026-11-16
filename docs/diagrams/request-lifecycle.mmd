@@ -1,0 +1,23 @@
+sequenceDiagram
+ autonumber
+ participant B as Browser
+ participant R as Laravel Router
+ participant M as Middleware
+ participant C as Controller
+ participant V as Form Request
+ participant E as Eloquent
+ participant D as Database
+ participant I as Inertia
+ participant P as Vue Page
+ B->>R: HTTP request
+ R->>M: Match route and run middleware
+ M-->>B: Redirect or reject when blocked
+ M->>C: Continue allowed request
+ C->>V: Validate submitted input
+ V-->>C: Valid data or validation response
+ C->>E: Query or create model
+ E->>D: SQL operation
+ D-->>E: Rows or result
+ C->>I: Render Inertia page or redirect
+ I-->>B: Inertia payload
+ B->>P: Resolve Vue component and props
