@@ -1,0 +1,29 @@
+@startuml
+start
+:Open create post page;
+:Enter title and TipTap content;
+if (Select optional image?) then (yes)
+  :Check type/size in browser;
+  :Preview selected image;
+else (no)
+endif
+:Choose Save Draft or Publish;
+:Submit Inertia form;
+:Validate with StorePostRequest;
+if (Validation passes?) then (yes)
+  if (Visibility is published?) then (yes)
+    if (Content is non-empty?) then (yes)
+    else (no)
+      :Return content validation error;
+      stop
+    endif
+  endif
+  :Store optional image;
+  :Generate slug;
+  :Create Post record;
+  :Redirect to dashboard;
+else (no)
+  :Return field errors;
+endif
+stop
+@enduml
