@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Post authoring workflow</title>
+  <desc id="desc">A conceptual illustration of composing a post, validating it on the server and storing it in the database.</desc>
+  <defs><linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6e61ed"/><stop offset="1" stop-color="#27bfae"/></linearGradient></defs>
+  <rect x="12" y="12" width="1176" height="336" rx="28" fill="#111d38"/>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <g transform="translate(65 76)">
+      <rect width="230" height="205" rx="22" fill="#f7f9ff"/>
+      <rect x="28" y="28" width="174" height="18" rx="8" fill="#1e2d4e"/>
+      <rect x="28" y="66" width="138" height="9" rx="4" fill="#a3b2ca"/>
+      <rect x="28" y="87" width="160" height="9" rx="4" fill="#c2ccdc"/>
+      <rect x="28" y="116" width="174" height="53" rx="12" fill="#e5eaff"/>
+      <text x="115" y="238" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">1. Compose</text>
+      <text x="115" y="266" text-anchor="middle" font-size="15" fill="#c7d5ee">Title, editor and image</text>
+    </g>
+    <path d="M320 178 H420" stroke="#83e8d7" stroke-width="6" stroke-linecap="round"/>
+    <path d="M405 163 L421 178 L405 193" fill="none" stroke="#83e8d7" stroke-width="6" stroke-linecap="round"/>
+    <g transform="translate(460 76)">
+      <rect width="230" height="205" rx="22" fill="url(#panel)"/>
+      <path d="M66 58 L98 91 L164 34" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="45" y="120" width="140" height="10" rx="5" fill="#e9fffb" opacity=".85"/>
+      <rect x="63" y="145" width="104" height="9" rx="4" fill="#e9fffb" opacity=".65"/>
+      <text x="115" y="238" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">2. Validate</text>
+      <text x="115" y="266" text-anchor="middle" font-size="15" fill="#c7d5ee">Server rules and checks</text>
+    </g>
+    <path d="M715 178 H815" stroke="#83e8d7" stroke-width="6" stroke-linecap="round"/>
+    <path d="M800 163 L816 178 L800 193" fill="none" stroke="#83e8d7" stroke-width="6" stroke-linecap="round"/>
+    <g transform="translate(855 76)">
+      <rect width="230" height="205" rx="22" fill="#f7f9ff"/>
+      <ellipse cx="115" cy="64" rx="67" ry="25" fill="#d8e7ff" stroke="#6e85af" stroke-width="5"/>
+      <path d="M48 64 V143 C48 157 78 170 115 170 C152 170 182 157 182 143 V64" fill="#d8e7ff" stroke="#6e85af" stroke-width="5"/>
+      <path d="M48 103 C48 117 78 130 115 130 C152 130 182 117 182 103" fill="none" stroke="#6e85af" stroke-width="5"/>
+      <text x="115" y="238" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">3. Persist</text>
+      <text x="115" y="266" text-anchor="middle" font-size="15" fill="#c7d5ee">Post row and media path</text>
+    </g>
+    <text x="600" y="325" text-anchor="middle" font-size="14" fill="#94aacd">Conceptual workflow illustration. See editable Mermaid source for implementation notes and known gaps.</text>
+  </g>
+</svg>
