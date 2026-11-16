@@ -1,0 +1,7 @@
+flowchart TB
+ Visitor[Visitor / author] --> Browser[Browser]
+ Browser --> Application[Blog Management System]
+ Application --> Database[(Relational database)]
+ Application --> Media[Laravel filesystem]
+ Application --> Mail[Configured mail transport]
+ Application --> Visitor
