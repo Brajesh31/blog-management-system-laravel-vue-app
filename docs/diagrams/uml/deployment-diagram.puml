@@ -1,0 +1,35 @@
+@startuml
+node "User Device" {
+  artifact "Browser" as Browser
+}
+
+node "Application Host" {
+  node "HTTPS Reverse Proxy" as Proxy
+  node "PHP Runtime / Laravel" as PHP {
+    artifact "Laravel application" as Laravel
+    artifact "Inertia responses" as Inertia
+  }
+  folder "Persistent upload storage" as Storage
+}
+
+database "MySQL / configured DB" as DB
+node "Queue service / worker (when enabled)" as Queue
+cloud "Mail provider (configured)" as Mail
+node "Build runner" as Build {
+  artifact "Composer dependencies" as Composer
+  artifact "npm + Vite assets" as Vite
+}
+
+Browser --> Proxy : HTTPS
+Proxy --> PHP
+PHP --> DB
+PHP --> Storage
+PHP --> Queue
+PHP --> Mail
+Build --> PHP : release artifact
+note right of PHP
+Document root must be public/.
+The exact host, proxy, queue and DB
+topology is deployment-specific.
+end note
+@enduml
