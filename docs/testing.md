@@ -53,3 +53,15 @@ These are target tests, not claims that the scenarios currently pass.
 7. Run dependency and secret scans with least-privilege permissions.
 
 Never make CI green by skipping a failing check that reveals a genuine defect.
+
+
+## Observed CI baseline (2026-11-16)
+
+The repository's current quality workflow was executed against the documentation-enhancement branch. The PHP syntax check and changed-file Pint check passed, but the full test suite did not.
+
+The observed test summary was **13 failed, 11 warnings, 1 passed (49 assertions)**. Visible failures included:
+- Some authentication screens returned redirects or 404 responses where the existing tests expected HTTP 200.
+- Some password-confirmation, password-update and account-deletion tests submitted `password`, while the current UserFactory uses a different shared development password. Align the fixtures and tests deliberately; do not weaken password checks.
+- Several page-rendering tests failed because `public/build/manifest.json` was absent. The normal frontend build currently fails earlier on case-sensitive label imports, so the test environment does not yet have a valid compiled manifest.
+
+These are existing test/application configuration problems, not failures caused by documentation files. The exact output should be refreshed after the corresponding fixes. Do not mark the test suite as passing until a clean workflow run proves it.
