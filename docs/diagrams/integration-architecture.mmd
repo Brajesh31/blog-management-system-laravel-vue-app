@@ -1,0 +1,9 @@
+flowchart LR
+ Browser[Browser] --> Laravel[Laravel application]
+ Laravel --> MySQL[(Configured DB)]
+ Laravel --> Disk[Laravel filesystem]
+ Laravel --> Mail[Configured mail service]
+ Laravel --> Inertia[Inertia protocol]
+ Inertia --> Vue[Vue frontend]
+ Vue --> Vite[Vite asset bundle]
+ note[No external REST API integration or third-party content provider is currently established]
