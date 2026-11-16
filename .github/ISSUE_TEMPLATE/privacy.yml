@@ -1,0 +1,33 @@
+name: "🛡️ Privacy and data handling question"
+description: Raise a non-security concern about data collection, visibility, retention or deletion.
+title: "[Privacy]: "
+labels: ["privacy", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include real user data, private post content, emails, tokens or account identifiers. For security vulnerabilities, use the private reporting link in SECURITY.md."
+  - type: textarea
+    id: concern
+    attributes:
+      label: Describe the privacy concern
+      description: Explain the data category and expected behavior without exposing personal data.
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Relevant area
+      description: Account, profile, post, media, notification, logs, backup or another area.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected privacy behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safe
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have not included personal data, credentials or private content.
+          required: true
