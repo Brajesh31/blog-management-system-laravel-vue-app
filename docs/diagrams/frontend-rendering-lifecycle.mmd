@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant Browser
+  participant Inertia as Inertia client
+  participant Laravel as Laravel route/controller
+  participant Vue as Vue page resolver
+  participant Component as Page components
+  Browser->>Inertia: Navigate or submit form
+  Inertia->>Laravel: Web request with session/CSRF context
+  Laravel-->>Inertia: Inertia page payload or redirect
+  Inertia->>Vue: Resolve component name and props
+  Vue->>Component: Render page/layout/shared UI
+  Component-->>Browser: Update DOM and interaction state
+  Browser->>Inertia: Next navigation or form request
