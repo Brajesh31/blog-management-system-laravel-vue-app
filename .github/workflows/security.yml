@@ -25,7 +25,7 @@ jobs:
       - run: composer audit --locked
 
   npm-audit:
-    name: npm dependency audit
+    name: npm lockfile audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      # npm audit reads package-lock.json directly. Avoid npm ci here because
+      # the current lockfile has a TipTap v2/v3 peer-version conflict that is
+      # tracked as technical debt and should be fixed with a reviewed lockfile update.
       - run: npm audit --omit=dev
 
   secret-scan:
