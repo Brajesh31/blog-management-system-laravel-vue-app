@@ -1,0 +1,43 @@
+name: "🐛 Bug report"
+description: Report a reproducible application defect.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Remove credentials, personal data, private post content and production URLs before submitting."
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Explain observed and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Sign in with a local test account..."
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Runtime versions
+      description: PHP, Laravel, Node, npm, database driver, browser and OS.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized logs or screenshots
+      description: Never include .env values, cookies, tokens, real user data or private content.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I removed secrets and private data.
+          required: true
