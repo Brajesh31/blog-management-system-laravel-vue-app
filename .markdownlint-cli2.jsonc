@@ -1,12 +1,16 @@
 {
   "config": {
     "default": true,
+    "MD001": false,
     "MD013": false,
+    "MD022": false,
     "MD024": { "siblings_only": true },
+    "MD026": false,
     "MD031": false,
     "MD032": false,
     "MD033": { "allowed_elements": ["a", "div", "img", "p"] },
     "MD041": false,
+    "MD051": false,
     "MD060": false
   },
   "globs": [
