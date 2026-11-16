@@ -1,0 +1,12 @@
+flowchart LR
+ Visitor((Visitor)) --> Register[Register account]
+ Visitor --> Login[Sign in]
+ Visitor --> Home[View home page]
+ Author((Verified user)) --> Profile[Edit own profile]
+ Author --> Create[Create draft or published post]
+ Author --> Logout[Sign out]
+ Author --> Delete[Delete own account]
+ Maintainer((Maintainer)) --> Configure[Configure deployment]
+ Maintainer --> Review[Review issues and pull requests]
+ Maintainer --> Release[Prepare release]
+ note[Post feed/detail and social actions are incomplete; not shown as supported use cases]
