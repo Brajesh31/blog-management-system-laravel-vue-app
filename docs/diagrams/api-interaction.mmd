@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant UI as Vue/Inertia UI
+  participant Router as Laravel web router
+  participant Middleware as Web/session/auth middleware
+  participant Controller
+  participant DB as Eloquent/database
+  UI->>Router: GET/POST/PATCH/DELETE web request
+  Router->>Middleware: Session, CSRF, auth and verified checks
+  Middleware-->>UI: Redirect/reject if blocked
+  Middleware->>Controller: Continue permitted request
+  Controller->>DB: Read or persist validated data
+  DB-->>Controller: Result
+  Controller-->>UI: Inertia page props or redirect/validation errors
+  Note over UI,Controller: No standalone routes/api.php or REST/OpenAPI contract is currently present.
