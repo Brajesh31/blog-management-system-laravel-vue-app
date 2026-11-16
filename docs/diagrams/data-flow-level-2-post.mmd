@@ -1,0 +1,13 @@
+flowchart TD
+ Form[Title, TipTap HTML, visibility, optional image] --> Guard[Auth and verified middleware]
+ Guard --> Validation[StorePostRequest]
+ Validation --> Valid{Valid?}
+ Valid -->|No| Errors[Back with errors]
+ Valid -->|Yes| IsPublish{Visibility published?}
+ IsPublish -->|Yes| HasBody{Body non-empty?}
+ IsPublish -->|No draft| Upload[Store optional image]
+ HasBody -->|No| Errors
+ HasBody -->|Yes| Upload
+ Upload --> Slug[Generate unique slug]
+ Slug --> DB[(Insert Post)]
+ DB --> Redirect[Redirect to dashboard]
