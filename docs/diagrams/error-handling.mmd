@@ -1,0 +1,9 @@
+flowchart TD
+ Submit[Browser form submission] --> Validate[Server Form Request]
+ Validate --> Valid{Validation passes?}
+ Valid -->|No| FieldErrors[Redirect with validation errors]
+ Valid -->|Yes| Controller[Controller persistence]
+ Controller --> Success{Store operation succeeds?}
+ Success -->|No| Log[Write server-side operational log]
+ Log --> SafeError[Return generic failure message]
+ Success -->|Yes| Flash[Redirect with success message]
