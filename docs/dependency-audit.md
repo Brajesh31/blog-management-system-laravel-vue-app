@@ -41,10 +41,10 @@ Do not use `npm audit fix --force` or broadly upgrade the Laravel framework with
 
 ## Additional CI diagnostics observed on 2026-11-16
 
-A later quality run exposed an installation conflict before the frontend build:
+An earlier quality run exposed an npm peer-dependency installation conflict before the frontend build. A later quality run completed `npm ci` successfully, so the conflict was not reproduced on the most recent run:
 
 - `npm ci` reported `ERESOLVE`: the lockfile resolution attempted `@tiptap/extension-image@3.34.0`, which declares a peer dependency on `@tiptap/core@3.34.0`, while the application uses the TipTap 2.11.7 editor packages.
-- The top-level package manifest declares TipTap 2.11.7-compatible ranges. Review the full lockfile resolution and regenerate it consistently before treating the dependency set as reproducible.
+- The top-level package manifest declares TipTap 2.11.7-compatible ranges. Review the lockfile if this conflict recurs; do not treat one transient failure as proof that the current install always fails.
 - Do not use `--force` as the permanent fix. A temporary legacy peer mode can hide an incompatible dependency tree and should not be treated as a correctness fix.
 
 The Composer audit remains a separate failure from the npm installation conflict. Run both audits independently and review the exact current advisories before updating lockfiles.
