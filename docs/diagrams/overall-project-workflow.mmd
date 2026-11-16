@@ -1,0 +1,11 @@
+flowchart TD
+  Plan[Product need and acceptance criteria] --> Design[Review architecture, data and risks]
+  Design --> Implement[Laravel and Vue implementation]
+  Implement --> Verify[PHP syntax, tests, frontend build and docs checks]
+  Verify --> Review{Checks and review acceptable?}
+  Review -->|No| Improve[Fix implementation or documentation]
+  Improve --> Implement
+  Review -->|Yes| Release[Prepare controlled deployment]
+  Release --> Operate[Monitor, back up and maintain]
+  Operate --> Feedback[User reports and technical debt]
+  Feedback --> Plan
