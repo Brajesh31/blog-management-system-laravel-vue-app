@@ -1,0 +1,14 @@
+stateDiagram-v2
+ [*] --> Draft
+ Draft --> Published
+ Published --> Archived
+ Draft --> Private
+ Published --> Private
+ Private --> Published
+ Archived --> [*]
+ note right of Draft
+   Database enum contains draft, published,
+   private, archived and restricted.
+   The graph is illustrative only.
+   Application transition rules are not implemented.
+ end note
