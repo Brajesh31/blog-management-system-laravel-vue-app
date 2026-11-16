@@ -1,0 +1,62 @@
+classDiagram
+ class User {
+   +name
+   +username
+   +email
+   +password
+   +posts()
+   +comments()
+   +likes()
+   +bookmarks()
+   +notifications()
+ }
+ class Post {
+   +user_id
+   +title
+   +content
+   +slug
+   +image
+   +visibility
+   +user()
+   +tags()
+   +comments()
+   +likes()
+   +bookmarks()
+ }
+ class Comment {
+   +user_id
+   +post_id
+   +parent_id
+   +content
+   +parent()
+   +replies()
+ }
+ class Like {
+   +user_id
+   +post_id
+ }
+ class Bookmark {
+   +user_id
+   +post_id
+ }
+ class Tag {
+   +name
+   +slug
+ }
+ class Notification {
+   +user_id
+   +sender_id
+   +type
+   +message
+   +read_at
+ }
+ User "1" --> "*" Post : authors
+ User "1" --> "*" Comment : writes
+ Post "1" --> "*" Comment : has
+ Comment "1" --> "*" Comment : replies
+ User "1" --> "*" Like : creates
+ Post "1" --> "*" Like : receives
+ User "1" --> "*" Bookmark : creates
+ Post "1" --> "*" Bookmark : saved
+ Post "*" --> "*" Tag : tagged
+ User "1" --> "*" Notification : receives
