@@ -1,0 +1,17 @@
+@startuml
+[*] --> Draft
+Draft --> Published
+Published --> Archived
+Draft --> Private
+Published --> Private
+Private --> Published
+Archived --> [*]
+note right of Draft
+The database enum includes:
+draft, published, private,
+archived and restricted.
+This diagram is a product-state proposal only.
+The application does not currently implement
+a complete post state-transition service.
+end note
+@enduml
