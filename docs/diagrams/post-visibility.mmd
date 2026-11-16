@@ -1,0 +1,10 @@
+flowchart TD
+ Request[GET /posts?search=...] --> Query[Newest-first query with user and tags]
+ Query --> Auth{Authenticated?}
+ Auth -->|No| Guest[Filter visibility = published]
+ Auth -->|Yes| User[Published OR owned by current user]
+ Guest --> Search[Optional title/content/author substring search]
+ User --> Search
+ Search --> Page[Paginate 10, preserve query string]
+ Page --> Render[Render Posts/Index]
+ Render --> Gap[⚠️ Vue page is currently missing]
