@@ -1,0 +1,41 @@
+@startuml
+skinparam componentStyle rectangle
+
+package "Browser" {
+  [Vue 3 Pages] as Vue
+  [Shared UI Components] as UI
+  [TipTap Editor] as Editor
+  [Inertia Client] as InertiaClient
+}
+
+package "Laravel Application" {
+  [Web and Auth Routes] as Routes
+  [Middleware] as Middleware
+  [HTTP Controllers] as Controllers
+  [Form Requests] as FormRequests
+  [Eloquent Models] as Models
+  [Inertia Server Adapter] as InertiaServer
+}
+
+database "Relational Database" as DB
+folder "Laravel Filesystem" as Storage
+cloud "Mail Transport (configured)" as Mail
+
+Vue --> InertiaClient
+Vue --> UI
+Vue --> Editor
+InertiaClient --> Routes : web requests
+Routes --> Middleware
+Middleware --> Controllers
+Controllers --> FormRequests
+Controllers --> Models
+Models --> DB
+Controllers --> Storage : image upload
+Controllers --> InertiaServer
+InertiaServer --> Vue : page props / redirect
+Controllers ..> Mail : framework mail flows
+note right of Controllers
+Post lifecycle actions are incomplete.
+Social workflows are not fully wired.
+end note
+@enduml
