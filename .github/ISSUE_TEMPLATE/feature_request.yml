@@ -1,0 +1,38 @@
+name: "✨ Feature request"
+description: Propose a user-focused improvement.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Who has the problem and what are they trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe workflow, states and expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Include permissions, validation, errors and edge cases.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Security, privacy and accessibility
+      description: Consider user data, authorization, keyboard use and assistive technology.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I checked current implementation notes and roadmap.
+          required: true
