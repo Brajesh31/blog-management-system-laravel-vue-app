@@ -1,0 +1,10 @@
+flowchart TD
+ Routes[routes/web.php and auth.php] --> Controllers[HTTP controllers]
+ Controllers --> Requests[Form Requests]
+ Controllers --> Models[Eloquent models]
+ Models --> Database[(Migrations and DB)]
+ Controllers --> Inertia[Inertia responses]
+ Inertia --> Pages[Vue Pages]
+ Pages --> Components[Reusable Vue components]
+ Components --> Hooks[Composables and Pinia]
+ Vite[Vite configuration] --> Pages
