@@ -114,6 +114,36 @@ The build script runs `vue-tsc` before Vite. `phpunit.xml` configures the testin
 - [Troubleshooting](docs/troubleshooting.md)
 - [FAQ](docs/faq.md)
 
+## 📚 Documentation
+
+The expanded documentation suite is organized in the [Documentation Hub](docs/README.md).
+
+| Area | Guide |
+|---|---|
+| 🏗️ Architecture and structure | [Architecture](docs/architecture.md) · [Project structure](docs/project-structure.md) |
+| ⚙️ Setup and configuration | [Installation](docs/installation.md) · [Configuration](docs/configuration.md) |
+| 🧭 Development and HTTP | [Development](docs/development.md) · [HTTP routes](docs/api.md) |
+| 🗄️ Data and testing | [Database](docs/database.md) · [Testing](docs/testing.md) |
+| 🚀 Release and operations | [Deployment](docs/deployment.md) · [Operations](docs/operations.md) |
+| 🔐 Trust and inclusive UX | [Security review](docs/security.md) · [Privacy](docs/privacy.md) · [Accessibility](docs/accessibility.md) |
+| 🧯 Project support | [Risk register](docs/risk-register.md) · [Troubleshooting](docs/troubleshooting.md) · [FAQ](docs/faq.md) |
+| 🧩 Visual references | [Mermaid diagrams](docs/diagrams/README.md) · [Glossary](docs/glossary.md) · [ADRs](docs/adr/README.md) |
+
+### 🗺️ System architecture
+
+```mermaid
+flowchart LR
+ Browser[🌐 Browser] --> Laravel[Laravel 12 routes and middleware]
+ Laravel --> Controller[Controllers and Form Requests]
+ Controller --> DB[(Eloquent / database)]
+ Controller --> Inertia[Inertia response]
+ Inertia --> Vue[Vue 3 + TypeScript]
+ Vue --> Vite[Vite assets]
+ Controller --> Uploads[Public disk image uploads]
+```
+
+> ⚠️ These diagrams document the observed architecture. They do not indicate that unfinished post lifecycle or social workflows are production-ready.
+
 ## Security
 
 Do not commit `.env`, credentials, production data, or private uploads. Use HTTPS, disable debug mode in production, restrict database access, and review the known authorization and rich-content gaps before deployment. Read [SECURITY.md](SECURITY.md) for the reporting process and deployment guidance.
