@@ -1,0 +1,14 @@
+erDiagram
+ USER ||--o{ POST : authors
+ USER ||--o{ COMMENT : writes
+ USER ||--o{ LIKE : creates
+ USER ||--o{ BOOKMARK : saves
+ USER ||--o{ NOTIFICATION : receives
+ POST ||--o{ COMMENT : has
+ POST ||--o{ LIKE : receives
+ POST ||--o{ BOOKMARK : saved_by
+ POST }o--o{ TAG : categorized_by
+ COMMENT ||--o{ COMMENT : replies
+ USER ||--o{ NOTIFICATION : sends
+ POST ||--o{ NOTIFICATION : references
+ COMMENT ||--o{ NOTIFICATION : references
