@@ -1,0 +1,14 @@
+flowchart TB
+ subgraph Build
+  Source[Git repository] --> Composer[Composer dependencies]
+  Source --> Npm[npm dependencies]
+  Npm --> Vite[Vite production build]
+ end
+ subgraph Runtime
+  Web[HTTPS reverse proxy] --> PHP[PHP-FPM / Laravel]
+  PHP --> DB[(MySQL or configured DB)]
+  PHP --> Storage[Persistent upload storage]
+  PHP --> Mail[Mail transport]
+  PHP --> Queue[Queue backend and worker when used]
+ end
+ Build --> Web
