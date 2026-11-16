@@ -1,0 +1,9 @@
+flowchart TD
+ Alert[🚨 Alert or report] --> Triage[Assess scope and impact]
+ Triage --> Contain[Contain affected route, credential or service]
+ Contain --> Evidence[Preserve evidence safely]
+ Evidence --> Rotate[Rotate exposed secrets if needed]
+ Rotate --> Recover[Mitigate or restore service]
+ Recover --> Verify[Verify access and data integrity]
+ Verify --> Notify[Notify affected parties when required]
+ Notify --> Learn[Document root cause and prevention]
