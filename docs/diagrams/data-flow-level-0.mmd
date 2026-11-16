@@ -1,0 +1,6 @@
+flowchart LR
+ User[Browser user] -->|Account and content input| System[Blog Management System]
+ System -->|Pages and messages| User
+ System -->|Structured records| DB[(Database)]
+ System -->|Uploaded files| Files[(Filesystem)]
+ System -->|Email when configured| Email[Mail transport]
