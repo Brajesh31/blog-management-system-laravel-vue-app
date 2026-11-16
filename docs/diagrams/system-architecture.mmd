@@ -1,0 +1,10 @@
+flowchart LR
+ Browser[🌐 Browser] --> Web[Laravel web routes]
+ Web --> MW[Session / auth / verified middleware]
+ MW --> Controller[Controllers + Form Requests]
+ Controller --> Models[Eloquent models]
+ Models --> DB[(Configured database)]
+ Controller --> Inertia[Inertia response]
+ Inertia --> Vue[Vue 3 pages and components]
+ Vue --> Vite[Vite-built assets]
+ Controller --> FS[Public filesystem disk for current post images]
