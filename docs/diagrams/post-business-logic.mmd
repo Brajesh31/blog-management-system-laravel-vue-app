@@ -1,0 +1,13 @@
+flowchart TD
+  Start[Verified author submits post] --> Validate[Validate title, content, image and visibility]
+  Validate --> Valid{Valid?}
+  Valid -->|No| Reject[Return validation errors]
+  Valid -->|Yes| Draft{Visibility = draft?}
+  Draft -->|Yes| Persist[Create post with draft visibility]
+  Draft -->|No| Empty{Published content empty?}
+  Empty -->|Yes| Reject
+  Empty -->|No| Persist
+  Persist --> Slug[Generate unique slug from title]
+  Slug --> Record[(Persist Post)]
+  Record --> Done[Redirect to dashboard]
+  Done -.-> Missing[Future: owner policy, HTML sanitizer, media cleanup and lifecycle timestamps]
