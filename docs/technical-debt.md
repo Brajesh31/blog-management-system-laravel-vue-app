@@ -16,7 +16,7 @@ This list records current engineering debt observed during repository review. It
 | TD-10 | Operations | Retention, restore and media lifecycle unproven | Data loss/privacy risk | Run documented drills and write policies |
 | TD-11 | Dependencies | Composer/npm audit currently reports advisories | Vulnerable transitive/runtime packages may remain | Upgrade with lockfile changes and regression tests |
 | TD-12 | Accessibility | No completed assistive technology audit | Users may encounter inaccessible flows | Test editor, forms, nav, dialogs and status messages |
-| TD-13 | Dependencies | npm lockfile resolves TipTap Image 3.34 while editor core is 2.11.7 | `npm ci` fails with ERESOLVE and dependency consistency is not established | Regenerate and test a coherent TipTap 2 lockfile or plan a coordinated major upgrade |
+| TD-13 | Dependencies | A previous CI run reported a TipTap Image 3.34 / core 2.11.7 peer conflict; a later `npm ci` passed | Install reproducibility should be monitored if the conflict recurs | Re-run `npm ci` and inspect lockfile peer resolutions before changing versions |
 | TD-14 | Frontend imports | Case-mismatched `@/components/ui/label` paths on Linux | CI type-check cannot resolve label components | Align import path casing with actual `Components/ui/label` directory |
 | TD-15 | Frontend build | `resources/js/app.ts` imports Ziggy from Composer vendor path | Build requires Composer vendor files before Vite type-check | Ensure CI installs Composer dependencies before `npm run build` |
 | TD-16 | PHP style | Pint reported 19 formatting issues across 68 existing PHP files | Full-repository style check fails even when no PHP code changes | Apply Pint in a separately reviewed code-formatting change; CI checks changed PHP files |
