@@ -1,0 +1,11 @@
+flowchart TD
+  Browser[Browser interaction] --> Inertia[Inertia page protocol]
+  Inertia --> Laravel[Laravel application]
+  Laravel --> DB[(Configured relational DB)]
+  Laravel --> Files[Laravel filesystem]
+  Laravel --> Mail[Mail transport when configured]
+  Laravel --> Queue[Database queue when jobs are dispatched]
+  Build[Composer + npm/Vite build] --> App[Deployable Laravel application]
+  App --> Laravel
+  Note[No separate public REST API or external third-party integration workflow is established in the codebase]
+  Laravel -.-> Note
