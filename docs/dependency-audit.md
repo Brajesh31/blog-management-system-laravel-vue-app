@@ -38,3 +38,14 @@ The Composer audit output included Symfony YAML advisories, including CVE-2026-1
 7. Re-run audits and document remaining findings with an explicit risk decision.
 
 Do not use `npm audit fix --force` or broadly upgrade the Laravel framework without reviewing breaking changes. Do not claim vulnerabilities are fixed until the locked dependency tree and CI audit confirm it.
+
+
+## Additional CI diagnostics observed on 2026-11-16
+
+A later quality run exposed an installation conflict before the frontend build:
+
+- `npm ci` reported `ERESOLVE`: the lockfile resolution attempted `@tiptap/extension-image@3.34.0`, which declares a peer dependency on `@tiptap/core@3.34.0`, while the application uses the TipTap 2.11.7 editor packages.
+- The top-level package manifest declares TipTap 2.11.7-compatible ranges. Review the full lockfile resolution and regenerate it consistently before treating the dependency set as reproducible.
+- Do not use `--force` as the permanent fix. A temporary legacy peer mode can hide an incompatible dependency tree and should not be treated as a correctness fix.
+
+The Composer audit remains a separate failure from the npm installation conflict. Run both audits independently and review the exact current advisories before updating lockfiles.
