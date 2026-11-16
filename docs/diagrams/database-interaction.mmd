@@ -1,0 +1,11 @@
+flowchart TD
+  Request[Validated controller request] --> Model[Eloquent model / relationship]
+  Model --> Query[Build SQL query or persistence operation]
+  Query --> DB[(Relational database)]
+  DB --> Result[Rows, inserted ID or constraint result]
+  Result --> Model
+  Model --> Controller[Controller continues]
+  Controller --> Response[Inertia response or redirect]
+  Note[Foreign keys and unique constraints enforce relational integrity; they do not implement authorization]:::note
+  Result -.-> Note
+  classDef note fill:#fff3cd,stroke:#b58100,color:#473400;
