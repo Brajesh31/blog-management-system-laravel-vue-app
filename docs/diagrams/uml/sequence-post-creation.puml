@@ -1,0 +1,30 @@
+@startuml
+actor Author
+participant Browser
+participant "Laravel Router" as Router
+participant "Auth/Verified Middleware" as Middleware
+participant "StorePostRequest" as Request
+participant PostController
+participant "Filesystem Disk" as Disk
+database Database
+
+Author -> Browser: Enter title/content and choose visibility
+Browser -> Router: POST post.store
+Router -> Middleware: Check auth and email verification
+Middleware --> Router: Allow request
+Router -> Request: Validate request fields
+Request --> PostController: Validated data
+PostController -> PostController: Reject empty published content
+opt Image is present
+  PostController -> Disk: Store image under uploads/posts
+  Disk --> PostController: Stored path
+end
+PostController -> PostController: Generate unique title slug
+PostController -> Database: Insert Post
+Database --> PostController: Created record
+PostController --> Browser: Redirect to dashboard with status
+note over PostController,Database
+HTML sanitization and robust orphan-file cleanup
+are not established in the current implementation.
+end note
+@enduml
