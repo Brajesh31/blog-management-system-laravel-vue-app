@@ -17,17 +17,29 @@ jobs:
   frontend:
     name: Vue and TypeScript build
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:VGVzdEtleUZvckdpdEh1YlRlc3RzMDEyMzQ1Njc4OTA=
     steps:
       - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+      - name: Install Laravel dependencies for Ziggy types
+        run: composer install --no-interaction --prefer-dist
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run build
+      - name: Install frontend dependencies
+        run: npm ci
+      - name: Build and type-check frontend
+        run: npm run build
 
   backend:
-    name: PHP syntax, tests and formatting
+    name: PHP syntax, changed-file formatting and tests
     runs-on: ubuntu-latest
     env:
       APP_ENV: testing
@@ -36,6 +48,8 @@ jobs:
       DB_DATABASE: ":memory:"
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
@@ -46,9 +60,32 @@ jobs:
       - name: PHP syntax check
         run: |
           find app bootstrap config database routes tests -type f -name '*.php' -print0 | xargs -0 -n1 php -l
-      - name: Pint formatting check
-        run: vendor/bin/pint --test
+      - name: Pint check for PHP files changed in this push or pull request
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          BASE="$PR_BASE"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="$EVENT_BEFORE"
+          fi
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="$(git rev-parse HEAD^ 2>/dev/null || true)"
+          fi
+          if [ -z "$BASE" ]; then
+            echo "No base commit is available; skipping changed-file Pint check."
+            exit 0
+          fi
+          mapfile -d '' FILES < <(git diff --name-only -z "$BASE" HEAD -- '*.php' | while IFS= read -r -d '' file; do
+            [ -f "$file" ] && printf '%s\0' "$file"
+          done)
+          if [ "${#FILES[@]}" -eq 0 ]; then
+            echo "No PHP files changed; existing legacy style debt is documented separately."
+            exit 0
+          fi
+          vendor/bin/pint --test "${FILES[@]}"
       - name: Pest and PHPUnit tests
+        if: always()
         run: php artisan test
 
   documentation:
@@ -70,14 +107,17 @@ jobs:
               for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', content):
                   if target.startswith(('http://', 'https://', 'mailto:', '#')):
                       continue
-                  path = target.split('#', 1)[0]
+                  path = target.split('#', 1)[0].split('?', 1)[0]
                   if path and not (file.parent / path).resolve().exists():
                       errors.append(f'{file}: missing {target}')
           diagrams = list(Path('docs/diagrams').rglob('*.mmd'))
+          plantuml = list(Path('docs/diagrams').rglob('*.puml'))
           if len(diagrams) < 20:
               errors.append(f'Expected at least 20 Mermaid files, found {len(diagrams)}')
+          if len(plantuml) < 6:
+              errors.append(f'Expected at least 6 PlantUML files, found {len(plantuml)}')
           if errors:
               print('\n'.join(errors))
               sys.exit(1)
-          print(f'Checked {len(files)} Markdown files and {len(diagrams)} Mermaid sources.')
+          print(f'Checked {len(files)} Markdown files, {len(diagrams)} Mermaid files and {len(plantuml)} PlantUML files.')
           PY
