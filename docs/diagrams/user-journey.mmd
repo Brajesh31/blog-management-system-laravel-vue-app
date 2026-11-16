@@ -1,0 +1,17 @@
+flowchart TD
+  Visitor[Visitor] --> Home[Open home page]
+  Home --> Account{Already registered?}
+  Account -->|No| Register[Register account]
+  Account -->|Yes| Login[Sign in]
+  Register --> Verify[Verify email]
+  Login --> Verified{Email verified?}
+  Verify --> Verified
+  Verified -->|No| Verify
+  Verified -->|Yes| Dashboard[Open dashboard]
+  Dashboard --> Create[Open post creation]
+  Create --> Compose[Write title and content]
+  Compose --> Choice{Choose action}
+  Choice -->|Save draft| Draft[Create draft record]
+  Choice -->|Publish| Publish[Validate non-empty content and publish]
+  Draft --> Incomplete[Feed and post maintenance still need implementation]
+  Publish --> Incomplete
