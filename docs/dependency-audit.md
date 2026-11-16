@@ -39,7 +39,6 @@ The Composer audit output included Symfony YAML advisories, including CVE-2026-1
 
 Do not use `npm audit fix --force` or broadly upgrade the Laravel framework without reviewing breaking changes. Do not claim vulnerabilities are fixed until the locked dependency tree and CI audit confirm it.
 
-
 ## Additional CI diagnostics observed on 2026-11-16
 
 A later quality run exposed an installation conflict before the frontend build:
